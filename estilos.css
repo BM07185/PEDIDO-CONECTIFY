@@ -1,0 +1,101 @@
+/* Estilos Generales */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #fff7e6;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+header {
+  text-align: center;
+  background-color: #ffca28;
+  padding: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+header h1 {
+  margin: 10px 0;
+  font-size: 2em;
+  color: #d32f2f;
+}
+
+.logo {
+  width: 80px;
+  animation: giro 5s infinite linear;
+}
+
+@keyframes giro {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.contenedor {
+  max-width: 600px;
+  margin: 20px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  color: #d32f2f;
+  margin-bottom: 10px;
+}
+
+.formulario label {
+  display: block;
+  margin-top: 10px;
+}
+
+input, select, button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button {
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #b71c1c;
+}
+
+.lista-pedidos li {
+  background-color: #fff3e0;
+  margin: 10px 0;
+  padding: 15px;
+  border-radius: 5px;
+  list-style: none;
+  position: relative;
+  animation: aparecer 0.5s ease-out;
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+button + button {
+  margin-left: 10px;
+}
+
+footer {
+  text-align: center;
+  background-color: #ffca28;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}

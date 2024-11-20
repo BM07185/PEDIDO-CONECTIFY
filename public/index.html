@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pedidos en Tiempo Real</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Pedidos Recibidos</h1>
+  <ul id="ordersList"></ul>
+
+  <form id="orderForm">
+    <input type="text" id="customerName" placeholder="Nombre del Cliente" required>
+    <input type="text" id="dish" placeholder="Plato" required>
+    <textarea id="notes" placeholder="Notas"></textarea>
+    <button type="submit">Enviar Pedido</button>
+  </form>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io(); // Conectar al servidor de Socket.IO
+
+    // Escuchar evento de nuevo pedido y actualizar la interfaz
+    socket.on('newOrder', (order) => {
+      const ordersList = document.getElementById('ordersList');
+      const orderItem = document.createElement('li');
+      orderItem.textContent = `Pedido de ${order.customerName}: ${order.dish} (${order.notes || 'Sin notas'})`;
+      ordersList.appendChild(orderItem);
+      alert('¡Nuevo pedido recibido!');
+    });
+
+    // Enviar pedido mediante el formulario
+    const form = document.getElementById('orderForm');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const orderData = {
+        customerName: document.getElementById('customerName').value,
+        dish: document.getElementById('dish').value,
+        notes: document.getElementById('notes').value
+      };
+
+      const response = await fetch('/send-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(orderData)
+      });
+
+      if (response.ok) {
+        form.reset();
+      } else {
+        alert('Hubo un error al enviar el pedido.');
+      }
+    });
+  </script>
+</body>
+</html>
